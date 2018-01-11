@@ -165,6 +165,7 @@ import (
 	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
+	"github.com/chromedp/chromedp/runner"
 )
 
 func main() {
@@ -203,7 +204,7 @@ func takeScreenshot(ctxt context.Context, wg *sync.WaitGroup, pool *chromedp.Poo
 	defer wg.Done()
 
 	// allocate
-	c, err := pool.Allocate(ctxt)
+	c, err := pool.Allocate(ctxt,runner.HeadlessPathPort("/headless_shell/headless_shell", 9223))
 	if err != nil {
 		log.Printf("url (%d) `%s` error: %v", id, urlstr, err)
 		return
